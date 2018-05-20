@@ -22,3 +22,6 @@ devtools::install_github("ropensci/tabulizer", args="--no-multiarch")
 
 #Now load the package
 library(tabulizer)
+
+#You can view the report on
+http://rpubs.com/masterhimanshupoddar/extract-tables-from-pdf-in-R
