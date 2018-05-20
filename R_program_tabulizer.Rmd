@@ -1,0 +1,76 @@
+---
+title: "R program to extract tables from a PDF file"
+author: "Himanshu Poddar"
+date: "20 May 2018"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+# Extract multiple tables from a PDF file
+
+###Firstly Let us install some packages
+
+install.packages("rJava")
+library(rJava) # load and attach 'rJava' now
+install.packages("devtools")
+devtools::install_github("ropensci/tabulizer", args="--no-multiarch")
+
+#Load the library tabulizer
+```{r}
+library(tabulizer)
+```
+
+###Now we are ready to extract tables from your PDF reports.
+```{r}
+PATH = 'C:/Users/Himanshu Poddar/Desktop/datathon/Himachal/bilaspur (h.p.) Class - 3 (Mathematics)  Report Card.pdf'
+```
+
+##extract all the tables present inside the pdf file
+```{r}
+lst <- extract_tables(PATH, encoding="UTF-8") 
+```
+
+##extract specific tables present inside the pdf file using coordinates
+
+```{r}
+lst <- extract_tables(PATH, encoding="UTF-8",pages = 1,area = list(c(234.019,38.991,313.638,555.396))) #co-ordinates separated with comma
+```
+
+##CODE to extract all the tables in a pdf file
+```{r, eval = FALSE}
+#Load library
+library(tabulizer)
+#Directory path
+D_path = "C:/Users/Himanshu Poddar/Desktop/datathon/Himachal/"
+files = list.files(D_path)
+#looping through all the pdf files
+for(file in files) 
+{
+  path = paste(D_path,file,sep = "")
+  df = extract_tables(path, encoding="UTF-8") 
+  #print(df)
+}
+```
+
+##CODE to extract only specific table using its coordinates
+```{r, eval = FALSE}
+#Load library
+library(tabulizer)
+#Directory path
+D_path = "C:/Users/Himanshu Poddar/Desktop/datathon/Himachal/"
+files = list.files(D_path)
+#looping through all the pdf files
+for(file in files) 
+{
+  path = paste(D_path,file,sep = "")
+  df = extract_tables(path,pages = 1,area = list(c(234.019,38.991,313.638,555.396)))  #where area is the coordinate of the table
+  print(df)
+}
+```
+
+##Conclusion
+Now since all the tables are returned in a dataframe we can use R appropriate function to extract main content out of it.
