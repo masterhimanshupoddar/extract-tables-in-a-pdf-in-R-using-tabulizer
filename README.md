@@ -25,3 +25,5 @@ library(tabulizer)
 
 #You can view the report on
 http://rpubs.com/masterhimanshupoddar/extract-tables-from-pdf-in-R
+
+Author : Himanshu Poddar
